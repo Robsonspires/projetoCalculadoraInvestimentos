@@ -1,0 +1,59 @@
+function convertToMonthlyReturnRate(annualRate) {
+  return annualRate ** (1 / 12);
+}
+
+function generateReturnsArray(
+  starttingAmount = 0,
+  timeHorizon = 0,
+  timePeriod = "monthly",
+  monthlyContribution = 0,
+  returnRate = 0,
+  returnTimeFrame = "monthly"
+) {
+  if (!timeHorizon || !starttingAmount) {
+    throw new Error(
+      "Investimento inicial e prazo devem ser preenchidos com valores positivos."
+    );
+  }
+
+  const finalReturnRate =
+    returnTimeFrame === "monthly"
+      ? 1 + returnRate / 100
+      : convertToMonthlyReturnRate(1 + returnRate / 100);
+
+  const finalTimeHorizon =
+    timePeriod === "monthly" ? timeHorizon : timeHorizon * 12;
+
+  const referenceInvestmentObject = {
+    investmentAmount: starttingAmount,
+    interestReturn: 0,
+    totalInterestReturns: 0,
+    month: 0,
+    totalAmount: starttingAmount,
+  };
+
+  const returnsArray = [referenceInvestmentObject];
+  for (
+    let timeReference = 1;
+    timeReference <= finalTimeHorizon;
+    timeReference++
+  ) {
+    const totalAmount =
+      returnsArray[timeReference - 1].totalAmount * finalReturnRate +
+      monthlyContribution;
+    const interestReturn =
+      returnsArray[timeReference - 1].totalAmount * finalReturnRate;
+    const investmentAmount =
+      starttingAmount + monthlyContribution * timeReference;
+    const totalInterestReturns = totalAmount - investmentAmount;
+    const month = timeReference;
+    returnRate.push({
+      investmentAmount,
+      interestReturn,
+      totalInterestReturns,
+      month: timeReference,
+      totalAmount,
+    });
+  }
+  return returnsArray;
+}
