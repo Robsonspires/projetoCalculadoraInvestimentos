@@ -188,5 +188,5 @@ for (const formElement of form) {
 
 // calculateButton.addEventListener("click", renderProgression); // trocado do botão para o formulário.
 // form.addEventListener("submit", renderProgression);
-calculateButton.addEventListener("click", renderProgression);
+// calculateButton.addEventListener("click", renderProgression);
 cleanFormButton.addEventListener("click", clearForm);
