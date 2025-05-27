@@ -3,14 +3,14 @@ function convertToMonthlyReturnRate(annualRate) {
 }
 
 export function generateReturnsArray(
-  starttingAmount = 0,
+  startingAmount = 0,
   timeHorizon = 0,
   timePeriod = "monthly",
   monthlyContribution = 0,
   returnRate = 0,
   returnTimeFrame = "monthly"
 ) {
-  if (!timeHorizon || !starttingAmount) {
+  if (!timeHorizon || !startingAmount) {
     throw new Error(
       "Investimento inicial e prazo devem ser preenchidos com valores positivos."
     );
@@ -25,11 +25,11 @@ export function generateReturnsArray(
     timePeriod === "monthly" ? timeHorizon : timeHorizon * 12;
 
   const referenceInvestmentObject = {
-    investmentAmount: starttingAmount,
-    interestReturn: 0,
+    investedAmount: startingAmount,
+    interestReturns: 0,
     totalInterestReturns: 0,
     month: 0,
-    totalAmount: starttingAmount,
+    totalAmount: startingAmount,
   };
 
   const returnsArray = [referenceInvestmentObject];
@@ -41,15 +41,14 @@ export function generateReturnsArray(
     const totalAmount =
       returnsArray[timeReference - 1].totalAmount * finalReturnRate +
       monthlyContribution;
-    const interestReturn =
+    const interestReturns =
       returnsArray[timeReference - 1].totalAmount * (finalReturnRate - 1);
-    const investmentAmount =
-      starttingAmount + monthlyContribution * timeReference;
-    const totalInterestReturns = totalAmount - investmentAmount;
+    const investedAmount = startingAmount + monthlyContribution * timeReference;
+    const totalInterestReturns = totalAmount - investedAmount;
     const month = timeReference;
     returnsArray.push({
-      investmentAmount,
-      interestReturn,
+      investedAmount,
+      interestReturns,
       totalInterestReturns,
       month: timeReference,
       totalAmount,
@@ -57,3 +56,4 @@ export function generateReturnsArray(
   }
   return returnsArray;
 }
+// Ofir
