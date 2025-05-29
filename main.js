@@ -229,7 +229,6 @@ previousButton.addEventListener("click", () => {
   carouselEl.scrollLeft -= mainEl.clientWidth;
 });
 
+form.addEventListener("submit", renderProgression);
 // calculateButton.addEventListener("click", renderProgression); // trocado do botão para o formulário.
-// form.addEventListener("submit", renderProgression);
-calculateButton.addEventListener("click", renderProgression);
 cleanFormButton.addEventListener("click", clearForm);

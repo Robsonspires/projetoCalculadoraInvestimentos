@@ -149,14 +149,13 @@
         </button>
       </div>
     </aside>
-    <main class="row-span-2 col-span-2">
+    <main class="contain-content row-span-2 col-span-2">
       <button
         id="slide-arrow-previous"
         class="absolute inset-y-0 left-0 text-5xl cursor-pointer bg-slate-200 opacity-50 w-8 hover:opacity-100 focus:opacity-100"
       >
         &#8249;
       </button>
-
       <button
         cursor-pointer
         bg-slate-200
@@ -167,8 +166,8 @@
       >
         &#8250;
       </button>
-      <div id="carousel" class="h-full w-full flex">
-        <section id="charts-container" class="h-full">
+      <div id="carousel" class="h-full w-full flex overflow-auto scroll-smooth">
+        <section id="charts-container" class="h-full basis-full shrink-0">
           <div class="h-[36%] flex flex-col items-center pb-10">
             <p class="font-bold text-lg">Resultado Final</p>
             <canvas id="final-money-distribuition"></canvas>
@@ -178,7 +177,10 @@
             <canvas id="progression"></canvas>
           </div>
         </section>
-        <section id="table-container" class="h-full overflow-y-auto">
+        <section
+          id="table-container"
+          class="h-full basis-full overflow-y-auto shrink-0"
+        >
           <p class="font-bold text-lg text-center">Resultados Mensais</p>
           <table
             id="results-table"
